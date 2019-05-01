@@ -1,0 +1,7 @@
+ #define. Define una macro o una constante. Su sintaxis es #define x y, y lo que hace el preprocesador es sustituir en el resto del programa donde encuentre el texto x por y.
+
+#undef. Borra una macro de la tabla de definiciones.
+
+#if, #ifdef, #ifndef, #else y #endif. Se puede preguntar por el valor de una constante o la existencia o no de una macro. En caso de ser cierta la condición se compila el código entre #if y #else, en caso de ser falsa se compila el código entre #else y #endif
+
+ #include. Permite incluir un fichero dentro del programa C. Este fichero puede ser de cabecera (.h) u otro programa C. Los ficheros de cabecera contienen:

@@ -39,10 +39,6 @@ void Quicksort(int Array[], int Primero, int Ultimo, int n)
 
 	
 
-	} while (i <= j);
-
-	
-
 	if (Primero < j )
 	{
 		Quicksort(Array, Primero, j, n);

@@ -9,10 +9,10 @@ using std::endl;
 
 
 
-void Quicksort(int Array[], int Primero, int Ultimo, int n)
+void Quicksort(int Array[], int Primero, int Ultimo)
 {
 	int Temp;
-	int Pivote = Array[n / 2];
+	int Pivote = Array[Ultimo]; 
 	int i = Primero;
 	int j = Ultimo;
 
@@ -41,11 +41,11 @@ void Quicksort(int Array[], int Primero, int Ultimo, int n)
 
 	if (Primero < j )
 	{
-		Quicksort(Array, Primero, j, n);
+		Quicksort(Array, Primero, j);
 	}
 	if (i < Ultimo)
 	{
-		Quicksort(Array, i, Ultimo, n);
+		Quicksort(Array, i, Ultimo);
 	}
 		
 }
@@ -80,7 +80,7 @@ int main()
 	cout << "Tamaño del vector:"; cin >> n;
 	int*Arreglo = new int[n];
 	Llenar(n, Arreglo);  //ingreso de datos en array
-	Quicksort(Arreglo, 0, n - 1, n); // '0' es el primer elemento y n-1 es ultimo
+	Quicksort(Arreglo, 0, n - 1); // '0' es el primer elemento y n-1 es ultimo
 	cout << endl << "Su vector acomodado es: " << endl;
 	Imprimir(n, Arreglo); //muestra array ordenado
 

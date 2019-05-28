@@ -3,16 +3,21 @@
 class Delfin : public Mamiferos
 {
 public:
-	void Nombre()
+	void Nombre(string N)
 	{
-		std::cout << "Delfin y sus datos: " << std::endl;
+		Nom = N;
 	}
-	void Comer()
+	void Desplasar(string D)
 	{
-		std::cout << "Come peces" << std::endl;
+		Moverse = D;
 	}
-	void Desplasar()
+	void Reproducir(string R)
 	{
-		std::cout << "Este mamifero nada a traves del oceano" << std::endl;
+		Nacer = R;
 	}
+	void Años(int A)
+	{
+		Edad = A;
+	}
+	
 };

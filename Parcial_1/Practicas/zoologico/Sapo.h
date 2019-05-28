@@ -4,16 +4,21 @@
 class Sapo : public Anfibios
 {
 public:
-	void Nombre()
+	void Nombre(string N)
 	{
-		std::cout << "Sapo y sus datos: " << std::endl;
+		Nom = N;
 	}
-	void Comer()
+	void Desplasar(string D)
 	{
-		std::cout << "Come insectos" << std::endl;
+		Moverse = D;
 	}
-	void Desplasar()
+	void Reproducir(string R)
 	{
-		std::cout << "Puede desplazarse en tierra o en agua sin problemas" << std::endl;
+		Nacer = R;
 	}
+	void Años(int A)
+	{
+		Edad = A;
+	}
+
 };

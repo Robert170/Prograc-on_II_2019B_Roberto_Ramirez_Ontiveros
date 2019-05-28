@@ -3,17 +3,21 @@
 class Avestrus : public Aves
 {
 public:
-	void Nombre()
+	void Nombre(string N)
 	{
-		std::cout << "Avestrus y sus datos: " << std::endl;
+		Nom = N;
 	}
-	void Comer()
+	void Desplasar(string D)
 	{
-		std::cout << "Come insectos y semillas" << std::endl;
+		Moverse = D;
 	}
-	void Desplasar()
+	void Reproducir(string R)
 	{
-		std::cout << "Esta ave camina en lugar de volar" << std::endl;
+		Nacer = R;
+	}
+	void Años(int A)
+	{
+		Edad = A;
 	}
 };
 

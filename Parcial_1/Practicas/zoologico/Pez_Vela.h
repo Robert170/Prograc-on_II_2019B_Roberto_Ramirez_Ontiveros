@@ -3,16 +3,20 @@
 class Pez_Vela : public Peces
 {
 public:
-	void Nombre()
+	void Nombre(string N)
 	{
-		std::cout << "Pez vela y sus datos: " << std::endl;
+		Nom = N;
 	}
-	void Comer()
+	void Desplasar(string D)
 	{
-		std::cout << "Come otros peces" << std::endl;
+		Moverse = D;
 	}
-	void Desplasar()
+	void Reproducir(string R)
 	{
-		std::cout << "Se desplaza por los oceanos a altas velocidades" << std::endl;
+		Nacer = R;
+	}
+	void Años(int A)
+	{
+		Edad = A;
 	}
 };

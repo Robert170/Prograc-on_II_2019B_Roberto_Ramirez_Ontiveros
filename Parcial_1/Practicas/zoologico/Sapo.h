@@ -1,24 +1,20 @@
-
+#pragma once
 #include "Anfibios.h"
 
 class Sapo : public Anfibios
 {
 public:
-	void Nombre(string N)
-	{
-		Nom = N;
-	}
-	void Desplasar(string D)
-	{
-		Moverse = D;
-	}
-	void Reproducir(string R)
-	{
-		Nacer = R;
-	}
-	void Años(int A)
-	{
-		Edad = A;
-	}
-
+	Sapo(string N, char A, HEALTH H);
+	~Sapo();
 };
+
+Sapo::Sapo(string N, char A, HEALTH H)
+{
+	name = N;
+	age = A;
+	health = H;
+}
+
+Sapo::~Sapo()
+{
+}

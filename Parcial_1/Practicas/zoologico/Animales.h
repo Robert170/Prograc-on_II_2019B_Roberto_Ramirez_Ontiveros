@@ -6,15 +6,41 @@ using std::cout;
 using std::cin;
 using std::endl;
 
+enum HEALTH
+{
+	good, bad, critical
+};
+
 class Animales
 {
 public:
-	string Nom;
-	int Edad;
-	string Nacer;
-	string Moverse;
-	virtual void Nombre(string) = 0;
-	virtual void Desplasar(string) = 0;
-	virtual void Reproducir(string) = 0;
-	virtual void Años(int) = 0;
+	void Nombre(string N)
+	{
+		name = N;
+	}
+	void Salud(HEALTH D)
+	{
+		health = D;
+	}
+	void Años(char A)
+	{
+		age = A;
+	}
+	
+	string DevolverNombre()
+	{
+		return name;
+	}
+	HEALTH DevolverSalud()
+	{
+		return health;
+	}
+	char DevolverEdad()
+	{
+		return age;
+	}
+protected:
+	string name;
+	char age;
+	HEALTH health;
 };

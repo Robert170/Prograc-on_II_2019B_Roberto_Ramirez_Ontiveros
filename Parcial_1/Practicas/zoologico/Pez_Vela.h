@@ -1,22 +1,20 @@
+#pragma once
 #include "Peces.h"
 
 class Pez_Vela : public Peces
 {
 public:
-	void Nombre(string N)
-	{
-		Nom = N;
-	}
-	void Desplasar(string D)
-	{
-		Moverse = D;
-	}
-	void Reproducir(string R)
-	{
-		Nacer = R;
-	}
-	void Años(int A)
-	{
-		Edad = A;
-	}
+	Pez_Vela(string N, char A, HEALTH H);
+	~Pez_Vela();
 };
+
+Pez_Vela::Pez_Vela(string N, char A, HEALTH H)
+{
+	name = N;
+	age = A;
+	health = H;
+}
+
+Pez_Vela::~Pez_Vela()
+{
+}

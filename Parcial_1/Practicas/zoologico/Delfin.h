@@ -1,23 +1,21 @@
+#pragma once
 #include "Mamiferos.h"
 
 class Delfin : public Mamiferos
 {
 public:
-	void Nombre(string N)
-	{
-		Nom = N;
-	}
-	void Desplasar(string D)
-	{
-		Moverse = D;
-	}
-	void Reproducir(string R)
-	{
-		Nacer = R;
-	}
-	void Años(int A)
-	{
-		Edad = A;
-	}
-	
+	Delfin(string N,char A,HEALTH H);
+	~Delfin();
 };
+
+Delfin::Delfin(string N, char A, HEALTH H)
+{
+	name = N;
+	age = A;
+	health = H;
+}
+
+Delfin::~Delfin()
+{
+}
+

@@ -4,6 +4,7 @@
 class Delfin : public Mamiferos
 {
 public:
+	Delfin();
 	Delfin(string N,char A,HEALTH H);
 	~Delfin();
 };
@@ -16,6 +17,9 @@ Delfin::Delfin(string N, char A, HEALTH H)
 }
 
 Delfin::~Delfin()
+{
+}
+Delfin::Delfin()
 {
 }
 

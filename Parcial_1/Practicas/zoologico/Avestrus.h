@@ -3,6 +3,7 @@
 class Avestrus : public Aves
 {
 public:
+	Avestrus();
 	Avestrus(string N, char A, HEALTH H);
 	~Avestrus();
 };
@@ -15,5 +16,9 @@ Avestrus::Avestrus(string N, char A, HEALTH H)
 }
 
 Avestrus::~Avestrus()
+{
+}
+
+Avestrus::Avestrus()
 {
 }

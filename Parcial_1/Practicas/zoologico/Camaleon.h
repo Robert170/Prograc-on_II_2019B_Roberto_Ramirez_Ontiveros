@@ -4,6 +4,7 @@
 class Camaleon : public Reptiles
 {
 public:
+	Camaleon();
 	Camaleon(string N, char A, HEALTH H);
 	~Camaleon();
 };
@@ -16,5 +17,8 @@ Camaleon::Camaleon(string N, char A, HEALTH H)
 }
 
 Camaleon::~Camaleon()
+{
+}
+Camaleon::Camaleon()
 {
 }

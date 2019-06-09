@@ -4,6 +4,7 @@
 class Pez_Vela : public Peces
 {
 public:
+	Pez_Vela();
 	Pez_Vela(string N, char A, HEALTH H);
 	~Pez_Vela();
 };
@@ -16,5 +17,8 @@ Pez_Vela::Pez_Vela(string N, char A, HEALTH H)
 }
 
 Pez_Vela::~Pez_Vela()
+{
+}
+Pez_Vela::Pez_Vela()
 {
 }

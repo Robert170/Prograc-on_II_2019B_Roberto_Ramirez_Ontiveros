@@ -4,7 +4,7 @@
 #include "Pez_Vela.h"
 #include "Camaleon.h"
 
-Animales* Busqueda(Animales *Array[], int Primero, int Ultimo, string Nom)
+Animales* Busqueda(Animales *Array[], int Primero, int Ultimo, string Nom) //busqueda por nombre
 {
 	int Pivote = sizeof(Array) / 2;                             
 	int inf = 0;
@@ -36,7 +36,7 @@ Animales* Busqueda(Animales *Array[], int Primero, int Ultimo, string Nom)
 	}
 }
 
-Animales* Busqueda(Animales *Array[], int Primero, int Ultimo, char Edad)
+Animales* Busqueda(Animales *Array[], int Primero, int Ultimo, char Edad)//busqueda por edad
 {
 	int Pivote = sizeof(Array) / 2;
 	int inf = 0;
@@ -68,7 +68,7 @@ Animales* Busqueda(Animales *Array[], int Primero, int Ultimo, char Edad)
 	}
 }
 
-Animales* Busqueda(Animales *Array[], int Primero, int Ultimo, HEALTH Sal)
+Animales* Busqueda(Animales *Array[], int Primero, int Ultimo, HEALTH Sal) //busqueda por salud
 {
 	int Pivote = sizeof(Array) / 2;
 	int inf = 0;
@@ -100,7 +100,7 @@ Animales* Busqueda(Animales *Array[], int Primero, int Ultimo, HEALTH Sal)
 	}
 }
 
-void Quicksort(Animales *Array[], int Primero, int Ultimo, string Nom)
+void Quicksort(Animales *Array[], int Primero, int Ultimo, string Nom) //acomodo por nombre
 {
 	Animales *Temp;
 	Animales *Pivote = Array[Ultimo];
@@ -157,7 +157,7 @@ void Quicksort(Animales *Array[], int Primero, int Ultimo, string Nom)
 
 }
 
-void Quicksort(Animales *Array[], int Primero, int Ultimo,char Edad)
+void Quicksort(Animales *Array[], int Primero, int Ultimo,char Edad) //acomodo por edad 
 {
 	Animales *Temp;
 	Animales *Pivote = Array[Ultimo];
@@ -214,7 +214,7 @@ void Quicksort(Animales *Array[], int Primero, int Ultimo,char Edad)
 
 }
 
-void Quicksort(Animales *Array[], int Primero, int Ultimo, int Sa)
+void Quicksort(Animales *Array[], int Primero, int Ultimo, int Sa) //acomodo por salud
 {
 	Animales *Temp;
 	Animales *Pivote = Array[Ultimo];

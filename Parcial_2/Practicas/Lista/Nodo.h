@@ -5,6 +5,7 @@ using std::string;
 using std::cout;
 using std::cin;
 using std::endl;
+
 class Nodo
 {
 public:
@@ -20,6 +21,7 @@ public:
 	~Nodo();
 	void Add(Nodo *&No,Nodo *&Ant);
 	Nodo* GetNodo();
+	Nodo* GetNodo2(unsigned short Pos, unsigned short Con);
 	void Mostrar();
 };
 

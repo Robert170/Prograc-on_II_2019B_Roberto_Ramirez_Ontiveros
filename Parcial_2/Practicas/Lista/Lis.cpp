@@ -1,6 +1,6 @@
 #include "Lis.h"
 
-inline void Lis::Push(Nodo *No)
+void Lis::Push(Nodo *No)
 {
 	if (FirstNod == nullptr)
 	{
@@ -12,22 +12,26 @@ inline void Lis::Push(Nodo *No)
 	}
 }
 
-Nodo* Lis::Pull()
+Nodo* Lis::Pull(unsigned short Pos, unsigned short Con)
 {
-	if (FirstNod != nullptr)
+	
+	if (FirstNod == nullptr )
+	{
+		cout << "Sin nodo, no se elimino nada" << endl;
+	}
+	else if (FirstNod != nullptr && Pos==Con)
 	{
 		Temp = FirstNod;
 		FirstNod = FirstNod->GetNodo();
 		return Temp;
 	}
-	else
+	else if(FirstNod != nullptr && Pos != Con)
 	{
-		cout << "Sin nodo, no se elimino nada" << endl;
+		FirstNod->GetNodo2(Pos,Con);
 	}
-
 }
 
-inline void Lis::Print()
+void Lis::Print()
 {
 	if (FirstNod != nullptr)
 	{
@@ -41,7 +45,7 @@ inline void Lis::Print()
 	}
 }
 
-inline void Lis::Clear()
+void Lis::Clear()
 {
 	if (FirstNod != nullptr)
 	{

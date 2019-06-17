@@ -1,5 +1,4 @@
 #include "Lis.h"
-#include "Nodo.h"
 #include <string> 
 #include <iostream>
 using std::string;
@@ -7,7 +6,7 @@ using std::cout;
 using std::cin;
 using std::endl;
 
-int Menu(Lis *&L, unsigned char Eleccion, string Nombre, unsigned short Edad)
+int Menu(Lis *&L, unsigned char Eleccion, string Nombre, unsigned short Edad, unsigned short Posicion, unsigned short Contador)
 {
 	
 
@@ -24,6 +23,7 @@ int Menu(Lis *&L, unsigned char Eleccion, string Nombre, unsigned short Edad)
 		{
 		case '1':
 		{
+			
 			cout << "ingresa el un nombre: "; cin >> Nombre;
 			cout << "ingresa el una edad: "; cin >> Edad;
 			Nodo*N = new Nodo(Nombre, Edad);
@@ -32,8 +32,10 @@ int Menu(Lis *&L, unsigned char Eleccion, string Nombre, unsigned short Edad)
 		}
 		case '2':
 		{
-			Nodo*Temp = L->Pull();
-			cout << "El primer elemento sustraido y sus datos son: " << endl;
+			cout << "Que elemento de la lista quieres eliminar, ingresa su posicion" << endl;
+			cin >> Posicion;
+			Nodo*Temp = L->Pull(Posicion,Contador);
+			cout << "El elemento sustraido y sus datos son: " << endl;
 			cout << Temp->m_Nombre << endl;
 			cout << Temp->m_Edad << endl;
 			delete Temp;
@@ -47,13 +49,10 @@ int Menu(Lis *&L, unsigned char Eleccion, string Nombre, unsigned short Edad)
 			break;
 		case '0':
 			cout << "Gracias por usar este programa, adios" << endl;
-			break;
-		case '*':
-			Menu(*&L, Eleccion, Nombre, Edad);
-			break;
+			return 0;
 		}
-
-		system("cls");
+		
+		
 	}
 	return 0;
 }
@@ -67,8 +66,10 @@ int main()
 	unsigned char Eleccion = ' ';
 	string Nombre = " ";
 	unsigned short Edad = 0;
+	unsigned short Posicion = 0;
+	unsigned short Contador = 0;
 
-	Menu(*&L,Eleccion, Nombre, Edad); //llamada al menu
+	Menu(*&L,Eleccion, Nombre, Edad, Posicion, Contador); //llamada al menu
 
 	delete L;
 	cin.ignore();

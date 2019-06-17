@@ -1,7 +1,6 @@
 #include "Nodo.h"
 
 
-
 Nodo::Nodo(string Nom, unsigned short E)
 {
 	m_Nombre = Nom;
@@ -9,8 +8,9 @@ Nodo::Nodo(string Nom, unsigned short E)
 	SigNodo = nullptr;
 }
 
-inline Nodo::Nodo()
+Nodo::Nodo()
 {
+	
 }
 
 
@@ -33,9 +33,9 @@ void Nodo::Add(Nodo *&No, Nodo *&Ant)
 	{
 		SigNodo->Add(No, SigNodo);
 	}
-}
+ }
 
-inline Nodo * Nodo::GetNodo()
+Nodo * Nodo::GetNodo()
 {
 	if (SigNodo == nullptr)
 	{
@@ -47,8 +47,14 @@ inline Nodo * Nodo::GetNodo()
 	}
 }
 
+Nodo * Nodo::GetNodo2(unsigned short Pos, unsigned short Con)
+{
 
-inline void Nodo::Mostrar()
+	return nullptr;
+}
+
+
+void Nodo::Mostrar()
 {
 	if (SigNodo != nullptr)
 	{

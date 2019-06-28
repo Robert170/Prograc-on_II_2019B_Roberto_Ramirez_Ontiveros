@@ -49,8 +49,23 @@ Nodo * Nodo::GetNodo()
 
 Nodo * Nodo::GetNodo2(unsigned short Pos, unsigned short Con)
 {
-
-	return nullptr;
+	
+	Con++;
+	if (SigNodo == nullptr)
+	{
+		return nullptr;
+	}
+	else if (SigNodo != nullptr && Pos == Con)
+	{
+		Temp = SigNodo;
+		SigNodo=SigNodo->GetNodo();
+		return Temp;
+	}
+	else if (SigNodo != nullptr && Pos != Con)
+	{
+		SigNodo->GetNodo2(Pos, Con);
+	}
+	
 }
 
 

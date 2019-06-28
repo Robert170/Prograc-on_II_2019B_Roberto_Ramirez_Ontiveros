@@ -14,10 +14,11 @@ void Lis::Push(Nodo *No)
 
 Nodo* Lis::Pull(unsigned short Pos, unsigned short Con)
 {
+	Con = 1;
 	
 	if (FirstNod == nullptr )
 	{
-		cout << "Sin nodo, no se elimino nada" << endl;
+		return nullptr;
 	}
 	else if (FirstNod != nullptr && Pos==Con)
 	{
@@ -31,6 +32,16 @@ Nodo* Lis::Pull(unsigned short Pos, unsigned short Con)
 	}
 }
 
+Nodo * Lis::Get(Nodo *Pivote)
+{
+	if(FirstNod < Pivote)
+	{
+
+	}
+	
+	return nullptr;
+}
+
 void Lis::Print()
 {
 	if (FirstNod != nullptr)
@@ -41,7 +52,7 @@ void Lis::Print()
 	}
 	else
 	{
-		cout << "!!!!!Cola vacia ingrese nodos¡¡¡¡" << endl;
+		cout << "!!!!!Lista vacia ingrese nodo!!!!!!!" << endl;
 	}
 }
 
@@ -51,6 +62,8 @@ void Lis::Clear()
 	{
 		delete FirstNod;
 	}
+	
+
 }
 
 Lis::Lis()

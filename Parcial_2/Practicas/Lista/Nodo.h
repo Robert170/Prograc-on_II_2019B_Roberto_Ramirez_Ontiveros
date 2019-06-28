@@ -12,6 +12,7 @@ public:
 	//Miembros
 	Nodo*SigNodo;
 	Nodo*AnteNodo;
+	Nodo*Temp;
 	unsigned short m_Edad;
 	string m_Nombre;
 

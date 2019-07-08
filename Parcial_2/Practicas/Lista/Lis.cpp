@@ -1,45 +1,58 @@
 #include "Lis.h"
 
-void Lis::Push(Nodo *No)
+void Lis::Push(Nodo *No, unsigned short Pos)
 {
+	int Cont = 1;
 	if (FirstNod == nullptr)
 	{
 		FirstNod = No;
 	}
+	
+	else if (Pos == Cont)
+	{
+		Temp = FirstNod;
+		FirstNod = No;
+		FirstNod->Push(FirstNod, Temp);
+	}
 	else
 	{
-		FirstNod->Add(No, FirstNod);
+		FirstNod->Add(No, FirstNod, Pos, Cont);
 	}
+	LastNod = No;
+	contador++;
 }
 
-Nodo* Lis::Pull(unsigned short Pos, unsigned short Con)
+Nodo* Lis::Pull(unsigned short Pos)
 {
-	Con = 1;
+	int Con = 1;
 	
-	if (FirstNod == nullptr )
-	{
+	if (Pos <= 0 || FirstNod == nullptr) {
 		return nullptr;
 	}
-	else if (FirstNod != nullptr && Pos==Con)
+	else if (Pos == Con)
 	{
 		Temp = FirstNod;
 		FirstNod = FirstNod->GetNodo();
+		Temp->SigNodo = nullptr;
+		Temp->AnteNodo = nullptr;
+		contador--;
 		return Temp;
 	}
-	else if(FirstNod != nullptr && Pos != Con)
+	else if(Pos != Con)
 	{
-		FirstNod->GetNodo2(Pos,Con);
+		contador--;
+		return FirstNod->Pull(Pos, Con,FirstNod);
 	}
 }
 
-Nodo * Lis::Get(Nodo *Pivote)
+Nodo * Lis::Get(int i)
 {
-	if(FirstNod < Pivote)
-	{
-
+	if (i == 0) {
+		return FirstNod;
+	} else {
+		return FirstNod->Get(--i);
 	}
-	
-	return nullptr;
+
 }
 
 void Lis::Print()
@@ -60,14 +73,22 @@ void Lis::Clear()
 {
 	if (FirstNod != nullptr)
 	{
+		cout << "Deleating name: " << FirstNod->m_Nombre << endl;
 		delete FirstNod;
+		contador = 0;
 	}
 	
 
 }
 
+int Lis::Size() {
+	return contador;
+}
+
+
 Lis::Lis()
 {
+	contador = 0;
 }
 
 

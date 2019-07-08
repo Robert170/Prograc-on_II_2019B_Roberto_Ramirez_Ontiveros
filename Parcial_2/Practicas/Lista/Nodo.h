@@ -20,9 +20,15 @@ public:
 	Nodo(string Nom, unsigned short E);
 	Nodo();
 	~Nodo();
-	void Add(Nodo *&No,Nodo *&Ant);
+
+	void Push(Nodo *Ante, Nodo *No);
+	void Add(Nodo *&No,Nodo *&Ant, unsigned short Pos, unsigned short Con);
+	Nodo* Pull(unsigned short Pos, unsigned short Con, Nodo *&Ant);
 	Nodo* GetNodo();
-	Nodo* GetNodo2(unsigned short Pos, unsigned short Con);
+	Nodo* Get(int);
 	void Mostrar();
+
+	bool operator < (Nodo*);
+	bool operator > (Nodo*);
 };
 

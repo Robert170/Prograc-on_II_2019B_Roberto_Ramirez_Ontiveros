@@ -74,7 +74,6 @@ void Arbol::Inorden()
 		cout << "Apellido: " << Raiz->apellido << endl;
 		cout << "Nombre: " << Raiz->nombre << endl;
 		cout << "Edad: " << Raiz->edad << endl;
-		Raiz->InordenRigth();
 	}
 	else
 	{

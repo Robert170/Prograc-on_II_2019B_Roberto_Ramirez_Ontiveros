@@ -161,34 +161,13 @@ void User::InordenLeft()
 	if (Left->Left != nullptr)
 	{
 		Left->InordenLeft();
-		cout << "Apellido: " << Left->apellido << endl;
-		cout << "Nombre: " << Left->nombre << endl;
-		cout << "Edad: " << Left->edad << endl;
-		Rigth->InordenRigth();
 	}
-	else
-	{
-		cout << "Apellido: " << Left->apellido << endl;
-		cout << "Nombre: " << Left->nombre << endl;
-		cout << "Edad: " << Left->edad << endl;
-	}
-}
-
-void User::InordenRigth()
-{
+	cout << "Apellido: " << Left->apellido << endl;
+	cout << "Nombre: " << Left->nombre << endl;
+	cout << "Edad: " << Left->edad << endl;
 	if (Rigth != nullptr)
 	{
-		Left->InordenLeft();
-		cout << "Apellido: " << Left->apellido << endl;
-		cout << "Nombre: " << Left->nombre << endl;
-		cout << "Edad: " << Left->edad << endl;
-		Rigth->InordenRigth();
-	}
-	else
-	{
-		cout << "Apellido: " << Left->apellido << endl;
-		cout << "Nombre: " << Left->nombre << endl;
-		cout << "Edad: " << Left->edad << endl;
+		Rigth->InordenLeft();
 	}
 }
 

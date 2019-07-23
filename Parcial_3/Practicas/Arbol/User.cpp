@@ -156,52 +156,37 @@ void User::PreordenRigth()
 	
 }
 
-void User::InordenLeft()
+void User::Inorden()
 {
-	if (Left->Left != nullptr)
+	if (Left != nullptr)
 	{
-		Left->InordenLeft();
+		Left->Inorden();
 	}
-	cout << "Apellido: " << Left->apellido << endl;
-	cout << "Nombre: " << Left->nombre << endl;
-	cout << "Edad: " << Left->edad << endl;
+	cout << "Apellido: " << apellido << endl;
+	cout << "Nombre: " << nombre << endl;
+	cout << "Edad: " << edad << endl;
 	if (Rigth != nullptr)
 	{
-		Rigth->InordenLeft();
+		Rigth->Inorden();
 	}
 }
 
-void User::PostordenLeft()
+void User::Postorden()
 {
-	if (Left->Left != nullptr)
+	if (Left != nullptr)
 	{
-		Left->InordenLeft();
-		Rigth->PostordenRigth();
-		cout << "Apellido: " << Left->apellido << endl;
-		cout << "Nombre: " << Left->nombre << endl;
-		cout << "Edad: " << Left->edad << endl;
+		Left->Postorden();
 	}
-	else
+	if (Rigth != nullptr)
 	{
-		cout << "Apellido: " << Left->apellido << endl;
-		cout << "Nombre: " << Left->nombre << endl;
-		cout << "Edad: " << Left->edad << endl;
+		Rigth->Postorden();
 	}
+	cout << "Apellido: " << apellido << endl;
+	cout << "Nombre: " << nombre << endl;
+	cout << "Edad: " << edad << endl;
 }
 
-void User::PostordenRigth()
-{
-	if (Rigth->Left != nullptr)
-	{
-		Left->InordenLeft();
-	}
-	else
-	{
-		cout << "Apellido: " << Rigth->apellido << endl;
-		cout << "Nombre: " << Rigth->nombre << endl;
-		cout << "Edad: " << Rigth->edad << endl;
-	}
-}
+
 
 
 User::User()

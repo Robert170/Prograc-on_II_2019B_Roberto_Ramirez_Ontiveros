@@ -23,10 +23,8 @@ public:
 	int PushRigth(User*);
 	void PreordenLeft();
 	void PreordenRigth();
-	void InordenLeft();
-	void InordenRigth();
-	void PostordenLeft();
-	void PostordenRigth();
+	void Inorden();
+	void Postorden();
 	User();
 	~User();
 	

@@ -70,10 +70,7 @@ void Arbol::Inorden()
 {
 	if (Raiz != nullptr)
 	{
-		Raiz->InordenLeft();
-		cout << "Apellido: " << Raiz->apellido << endl;
-		cout << "Nombre: " << Raiz->nombre << endl;
-		cout << "Edad: " << Raiz->edad << endl;
+		Raiz->Inorden();
 	}
 	else
 	{
@@ -101,11 +98,7 @@ void Arbol::Postorden()
 {
 	if (Raiz != nullptr)
 	{
-		Raiz->PostordenLeft();
-		Raiz->PostordenRigth();
-		cout << "Apellido: " << Raiz->apellido << endl;
-		cout << "Nombre: " << Raiz->nombre << endl;
-		cout << "Edad: " << Raiz->edad << endl;
+		Raiz->Postorden();
 	}
 	else
 	{

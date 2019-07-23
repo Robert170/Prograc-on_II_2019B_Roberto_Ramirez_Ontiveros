@@ -48,6 +48,7 @@ int Menu(Arbol * A)
 		case '4':
 			system("cls");
 			A->Postorden();
+			break;
 		case '0':
 			return 0;
 			break;

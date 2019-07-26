@@ -13,54 +13,33 @@ Arbol::~Arbol()
 
 int Arbol::Push(User * U)
 {
-	char Eleccion = ' ';
 	if (Raiz == nullptr)
 	{
 		Raiz = U;
 	}
 	else
 	{
-		if (Raiz->Left == nullptr || Raiz->Rigth == nullptr)
+		if (U->apellido < Raiz->apellido)
 		{
 			if (Raiz->Left == nullptr)
 			{
-				cout << "Quieres ingresar el valor en el nodo Izquierdo? y/n" << endl;
-				cin >> Eleccion;
-				Eleccion = tolower(Eleccion);
-				if (Eleccion == 'y')
-				{
-					Raiz->Left = U;
-					return 0;
-				}
+				Raiz->Left = U;
 			}
+			else
+			{
+				Raiz->PushLeft(U);
+			}
+		}
+		if (U->apellido > Raiz->apellido)
+		{
 			if (Raiz->Rigth == nullptr)
 			{
-				if (Eleccion == 'y')
-				{
-				}
-				else
-				{
-					cout << "Quieres ingresar el valor en el nodo Derecho? y/n" << endl;
-					cin >> Eleccion;
-					Eleccion = tolower(Eleccion);
-					if (Eleccion == 'y')
-					{
-						Raiz->Rigth = U;
-						return 0;
-					}
-				}
+				Raiz->Rigth = U;
 			}
-		}
-
-		cout << "Quieres ir al nodo izquierdo(1) o al nodo derecho(2)" << endl;
-		cin >> Eleccion;
-		if (Eleccion == '1')
-		{
-			Raiz->PushLeft(U);
-		}
-		else if(Eleccion=='2')
-		{
+			else
+			{
 				Raiz->PushRigth(U);
+			}
 		}
 	}
 	return 0;

@@ -11,107 +11,53 @@ User::User(string Nom, string Ape, int Ed)
 
 int User::PushLeft(User * U)
 {
-	char Eleccion = ' ';
-	if (Left == nullptr)
+	
+	if (U->apellido < Left->apellido)
 	{
-		Left = U;
-	}
-	else
-	{
-		if (Left->Left == nullptr || Left->Rigth == nullptr)
+		if (Left->Left == nullptr)
 		{
-			if (Left->Left == nullptr)
-			{
-				cout << "Quieres ingresar el valor en el nodo Izquierdo? y/n" << endl;
-				cin >> Eleccion;
-				Eleccion = tolower(Eleccion);
-				if (Eleccion == 'y')
-				{
-					Left->Left = U;
-					return 0;
-				}
-			}
-			if (Left->Rigth == nullptr)
-			{
-				if (Eleccion == 'y')
-				{
-				}
-				else
-				{
-					cout << "Quieres ingresar el valor en el nodo Derecho? y/n" << endl;
-					cin >> Eleccion;
-					Eleccion = tolower(Eleccion);
-					if (Eleccion == 'y')
-					{
-						Left->Rigth = U;
-						return 0;
-					}
-				}
-			}
+			Left->Left = U;
 		}
-
-		cout << "Quieres ir al nodo izquierdo(1) o al nodo derecho(2)" << endl;
-		cin >> Eleccion;
-		if (Eleccion == '1')
+		else
 		{
 			Left->PushLeft(U);
 		}
-		else if (Eleccion == '2')
+	}
+	if (U->apellido > Left->apellido)
+	{
+		if (Left->Rigth == nullptr)
+		{
+			Left->Rigth = U;
+		}
+		else
 		{
 			Left->PushRigth(U);
 		}
 	}
+
 	return 0;
 }
 
 int User::PushRigth(User * U)
 {
-	char Eleccion = ' ';
-	if (Rigth == nullptr)
+	if (U->apellido < Rigth->apellido)
 	{
-		Rigth = U;
-	}
-	else
-	{
-		if (Rigth->Left == nullptr || Rigth->Rigth == nullptr)
+		if (Rigth->Left == nullptr)
 		{
-			if (Rigth->Left == nullptr)
-			{
-				cout << "Quieres ingresar el valor en el nodo Izquierdo? y/n" << endl;
-				cin >> Eleccion;
-				Eleccion = tolower(Eleccion);
-				if (Eleccion == 'y')
-				{
-					Rigth->Left = U;
-					return 0;
-				}
-			}
-			if (Rigth->Rigth == nullptr)
-			{
-				if (Eleccion == 'y')
-				{
-				}
-				else
-				{
-					cout << "Quieres ingresar el valor en el nodo Derecho? y/n" << endl;
-					cin >> Eleccion;
-					Eleccion = tolower(Eleccion);
-					if (Eleccion == 'y')
-					{
-						Rigth->Rigth = U;
-						return 0;
-					}
-				}
-			}
+			Rigth->Left = U;
 		}
-
-		cout << "Quieres ir al nodo izquierdo(1) o al nodo derecho(2)" << endl;
-		cin >> Eleccion;
-		if (Eleccion == '1')
+		else
 		{
 			Rigth->PushLeft(U);
 		}
-		else if (Eleccion == '2')
+	}
+	if (U->apellido > Rigth->apellido)
+	{
+		if (Rigth->Rigth == nullptr)
+		{
+			Rigth->Rigth = U;
+		}
+		else
 		{
 			Rigth->PushRigth(U);
 		}

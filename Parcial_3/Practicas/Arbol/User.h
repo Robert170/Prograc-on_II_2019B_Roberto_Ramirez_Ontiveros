@@ -19,12 +19,11 @@ public:
 
 	//Metodos
 	User(string, string, int);
-	int PushLeft(User*);
-	int PushRigth(User*);
 	void PreordenLeft();
 	void PreordenRigth();
 	void Inorden();
 	void Postorden();
+	void Push(User*);
 	User();
 	~User();
 	

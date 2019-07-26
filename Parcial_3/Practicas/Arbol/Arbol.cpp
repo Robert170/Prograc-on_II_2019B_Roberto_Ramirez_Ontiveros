@@ -27,9 +27,33 @@ int Arbol::Push(User * U)
 			}
 			else
 			{
-				Raiz->PushLeft(U);
+				Raiz->Push(U);
 			}
 		}
+		else if (U->nombre < Raiz->nombre)
+		{
+			if (Raiz->Left == nullptr)
+			{
+				Raiz->Left = U;
+			}
+			else
+			{
+				Raiz->Push(U);
+			}
+		}
+		else if (U->edad < Raiz->edad)
+		{
+			if (Raiz->Left == nullptr)
+			{
+				Raiz->Left = U;
+			}
+			else
+			{
+				Raiz->Push(U);
+			}
+		}
+
+
 		if (U->apellido > Raiz->apellido)
 		{
 			if (Raiz->Rigth == nullptr)
@@ -38,7 +62,29 @@ int Arbol::Push(User * U)
 			}
 			else
 			{
-				Raiz->PushRigth(U);
+				Raiz->Push(U);
+			}
+		}
+		else if (U->nombre > Raiz->nombre)
+		{
+			if (Raiz->Rigth == nullptr)
+			{
+				Raiz->Rigth = U;
+			}
+			else
+			{
+				Raiz->Push(U);
+			}
+		}
+		else if (U->edad > Raiz->edad)
+		{
+			if (Raiz->Rigth == nullptr)
+			{
+				Raiz->Rigth = U;
+			}
+			else
+			{
+				Raiz->Push(U);
 			}
 		}
 	}

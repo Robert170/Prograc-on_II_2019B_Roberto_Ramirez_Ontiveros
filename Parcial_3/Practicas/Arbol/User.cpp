@@ -9,61 +9,6 @@ User::User(string Nom, string Ape, int Ed)
 	edad = Ed;
 }
 
-int User::PushLeft(User * U)
-{
-	
-	if (U->apellido < Left->apellido)
-	{
-		if (Left->Left == nullptr)
-		{
-			Left->Left = U;
-		}
-		else
-		{
-			Left->PushLeft(U);
-		}
-	}
-	if (U->apellido > Left->apellido)
-	{
-		if (Left->Rigth == nullptr)
-		{
-			Left->Rigth = U;
-		}
-		else
-		{
-			Left->PushRigth(U);
-		}
-	}
-
-	return 0;
-}
-
-int User::PushRigth(User * U)
-{
-	if (U->apellido < Rigth->apellido)
-	{
-		if (Rigth->Left == nullptr)
-		{
-			Rigth->Left = U;
-		}
-		else
-		{
-			Rigth->PushLeft(U);
-		}
-	}
-	if (U->apellido > Rigth->apellido)
-	{
-		if (Rigth->Rigth == nullptr)
-		{
-			Rigth->Rigth = U;
-		}
-		else
-		{
-			Rigth->PushRigth(U);
-		}
-	}
-	return 0;
-}
 
 void User::PreordenLeft()
 {
@@ -130,6 +75,78 @@ void User::Postorden()
 	cout << "Apellido: " << apellido << endl;
 	cout << "Nombre: " << nombre << endl;
 	cout << "Edad: " << edad << endl;
+}
+
+void User::Push(User * U)
+{
+	if (U->apellido < apellido)
+	{
+		if (Left == nullptr)
+		{
+			Left = U;
+		}
+		else
+		{
+			Left->Push(U);
+		}
+	}
+	else if (U->nombre < nombre)
+	{
+		if (Left == nullptr)
+		{
+			Left = U;
+		}
+		else
+		{
+			Left->Push(U);
+		}
+	}
+	else if (U->edad < edad)
+	{
+		if (Left == nullptr)
+		{
+			Left = U;
+		}
+		else
+		{
+			Left->Push(U);
+		}
+	}
+
+	if (U->apellido > apellido)
+	{
+		if (Rigth == nullptr)
+		{
+			Rigth = U;
+		}
+		else
+		{
+			Rigth->Push(U);
+		}
+	}
+	else if (U->nombre > nombre)
+	{
+		if (Rigth == nullptr)
+		{
+			Rigth = U;
+		}
+		else
+		{
+			Rigth->Push(U);
+		}
+	}
+	else if (U->edad > edad)
+	{
+		if (Rigth == nullptr)
+		{
+			Rigth = U;
+		}
+		else
+		{
+			Rigth->Push(U);
+		}
+	}
+
 }
 
 

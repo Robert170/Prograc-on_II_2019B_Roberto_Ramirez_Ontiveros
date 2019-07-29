@@ -22,6 +22,7 @@ int Menu(Arbol * A)
 		cout << "Mostrar el arbol Inorden(2)" << endl;
 		cout << "Mostrar el arbol Preorden(3)" << endl;
 		cout << "Mostrar el arbol Postorden(4)" << endl;
+		cout << "Revisar si el arbol esta balanceado(5)" << endl;
 		cout << "Salir (0)" << endl;
 		cin >> Eleccion;
 
@@ -48,6 +49,10 @@ int Menu(Arbol * A)
 		case '4':
 			system("cls");
 			A->Postorden();
+			break;
+		case '5':
+			system("cls");
+			A->Balance();
 			break;
 		case '0':
 			return 0;

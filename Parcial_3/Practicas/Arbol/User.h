@@ -16,6 +16,10 @@ public:
 	int edad;
 	User*Rigth = nullptr;
 	User*Left = nullptr;
+	int Nivel = 0;
+	int balIzq = 0;
+	int balDer = 0;
+	int pesoAct = 0;
 
 	//Metodos
 	User(string, string, int);
@@ -23,7 +27,9 @@ public:
 	void PreordenRigth();
 	void Inorden();
 	void Postorden();
-	void Push(User*);
+	int Push(User*);
+	void Balance(int);
+	bool operator < (User*);
 	User();
 	~User();
 	

@@ -77,7 +77,7 @@ void User::Postorden()
 	cout << "Edad: " << edad << endl;
 }
 
-void User::Push(User * U)
+int User::Push(User * U)
 {
 	if (U->apellido < apellido)
 	{
@@ -89,6 +89,19 @@ void User::Push(User * U)
 		{
 			Left->Push(U);
 		}
+		return 0;
+	}
+	if (U->apellido > apellido)
+	{
+		if (Rigth == nullptr)
+		{
+			Rigth = U;
+		}
+		else
+		{
+			Rigth->Push(U);
+		}
+		return 0;
 	}
 	else if (U->nombre < nombre)
 	{
@@ -101,29 +114,6 @@ void User::Push(User * U)
 			Left->Push(U);
 		}
 	}
-	else if (U->edad < edad)
-	{
-		if (Left == nullptr)
-		{
-			Left = U;
-		}
-		else
-		{
-			Left->Push(U);
-		}
-	}
-
-	if (U->apellido > apellido)
-	{
-		if (Rigth == nullptr)
-		{
-			Rigth = U;
-		}
-		else
-		{
-			Rigth->Push(U);
-		}
-	}
 	else if (U->nombre > nombre)
 	{
 		if (Rigth == nullptr)
@@ -134,7 +124,21 @@ void User::Push(User * U)
 		{
 			Rigth->Push(U);
 		}
+		return 0;
 	}
+	else if (U->edad < edad)
+	{
+		if (Left == nullptr)
+		{
+			Left = U;
+		}
+		else
+		{
+			Left->Push(U);
+		}
+		return 0;
+	}
+
 	else if (U->edad > edad)
 	{
 		if (Rigth == nullptr)
@@ -145,8 +149,60 @@ void User::Push(User * U)
 		{
 			Rigth->Push(U);
 		}
+		return 0;
 	}
+	return 0;
 
+}
+
+void User::Balance(int Cont)
+{
+	Nivel = Cont;
+	if (Left != nullptr) 
+	{
+
+		Cont++;
+		Left->Balance(Cont);
+		Cont--;
+		balIzq = Left->pesoAct;
+		pesoAct = ((Nivel * balDer) + (Nivel * balIzq));
+		//temp->balIzq = pesoAct;
+	}
+	
+	if (Rigth != nullptr) 
+	{
+		Cont++;
+		Rigth->Balance(Cont);
+		Cont--;
+		balDer = Rigth->pesoAct;
+		pesoAct = ((Nivel * balIzq) + (Nivel * balDer));
+		//temp->balDer = pesoAct;
+	}
+	else
+	{
+		pesoAct = Nivel;
+	}
+	
+}
+
+bool User::operator < (User * U)
+{
+	if (apellido < U->apellido)
+	{
+		return true;
+	}
+	else if (nombre < U->nombre)
+	{
+		return true;
+	}
+	else if (edad < U->edad)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 
@@ -154,6 +210,14 @@ void User::Push(User * U)
 
 User::User()
 {
+	if (Left != nullptr)
+	{
+		delete Left;
+	}
+	if (Rigth != nullptr)
+	{
+		delete Rigth;
+	}
 }
 
 

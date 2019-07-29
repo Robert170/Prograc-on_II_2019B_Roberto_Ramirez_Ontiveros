@@ -9,6 +9,10 @@ Arbol::Arbol()
 
 Arbol::~Arbol()
 {
+	if (Raiz != nullptr)
+	{
+		delete Raiz;
+	}
 }
 
 int Arbol::Push(User * U)
@@ -29,30 +33,8 @@ int Arbol::Push(User * U)
 			{
 				Raiz->Push(U);
 			}
+			return 0;
 		}
-		else if (U->nombre < Raiz->nombre)
-		{
-			if (Raiz->Left == nullptr)
-			{
-				Raiz->Left = U;
-			}
-			else
-			{
-				Raiz->Push(U);
-			}
-		}
-		else if (U->edad < Raiz->edad)
-		{
-			if (Raiz->Left == nullptr)
-			{
-				Raiz->Left = U;
-			}
-			else
-			{
-				Raiz->Push(U);
-			}
-		}
-
 
 		if (U->apellido > Raiz->apellido)
 		{
@@ -64,7 +46,21 @@ int Arbol::Push(User * U)
 			{
 				Raiz->Push(U);
 			}
+			return 0;
 		}
+		else if (U->nombre < Raiz->nombre)
+		{
+			if (Raiz->Left == nullptr)
+			{
+				Raiz->Left = U;
+			}
+			else
+			{
+				Raiz->Push(U);
+			}
+			return 0;
+		}
+
 		else if (U->nombre > Raiz->nombre)
 		{
 			if (Raiz->Rigth == nullptr)
@@ -75,6 +71,20 @@ int Arbol::Push(User * U)
 			{
 				Raiz->Push(U);
 			}
+			return 0;
+		}
+
+		else if (U->edad < Raiz->edad)
+		{
+			if (Raiz->Left == nullptr)
+			{
+				Raiz->Left = U;
+			}
+			else
+			{
+				Raiz->Push(U);
+			}
+			return 0;
 		}
 		else if (U->edad > Raiz->edad)
 		{
@@ -86,6 +96,7 @@ int Arbol::Push(User * U)
 			{
 				Raiz->Push(U);
 			}
+			return 0;
 		}
 	}
 	return 0;
@@ -128,5 +139,24 @@ void Arbol::Postorden()
 	else
 	{
 		cout << "Arbol vacio" << endl;
+	}
+}
+
+void Arbol::Balance()
+{
+	if (Raiz->Left != nullptr) 
+	{
+		Cont++;
+		Raiz->Left->Balance(Cont);
+		if (Raiz->Left->balDer != Raiz->Left->balIzq)
+		{
+			cout << "Lado izquierdo dezbalanceado" << endl;
+		}
+	}
+	if (Raiz->Rigth != nullptr)
+	{
+		Cont = 0;
+		Cont++;
+		Raiz->Rigth->Balance(Cont);
 	}
 }

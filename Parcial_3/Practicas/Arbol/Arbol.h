@@ -12,6 +12,7 @@ class Arbol
 public:
 	//Mienbros
 	User*Raiz = nullptr;
+	int Cont = 0;
 
 	//Metodos
 	Arbol();
@@ -20,6 +21,7 @@ public:
 	void Inorden();
 	void Preorden();
 	void Postorden();
+	void Balance();
 
 };
 

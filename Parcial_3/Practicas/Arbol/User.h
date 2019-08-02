@@ -36,7 +36,7 @@ public:
 	bool operator = (User&);
 
 	int Pull(User*, User*);
-	void Desplazar(User*);
+	User Desplazar(User*);
 	User();
 	~User();
 	

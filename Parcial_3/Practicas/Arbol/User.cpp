@@ -185,18 +185,6 @@ bool User::operator = (User & U)
 
 int User::Pull(User * U, User * Temp)
 {
-	if (*U > *Temp)
-	{
-		Temp = Left;
-		Left->Pull(U, Temp);
-		return 0;
-	}
-	if (*U < *Temp)
-	{
-		Temp = Rigth;
-		Rigth->Pull(U, Temp);
-		return 0;
-	}
 	if (*U = *Temp)
 	{
 		if (Temp->Left == nullptr && Temp->Rigth == nullptr)
@@ -250,16 +238,29 @@ int User::Pull(User * U, User * Temp)
 
 			if (Temp->Left != nullptr && Temp->Rigth != nullptr)
 			{
-				Temp->Rigth->Desplazar(Temp);
-
+				User * T = new User();
+				T = &Temp->Rigth->Desplazar(Temp);
 				return 0;
 			}
 		}
 	}
+	if (*U > *Temp)
+	{
+		Temp = Left;
+		Left->Pull(U, Temp);
+		return 0;
+	}
+	if (*U < *Temp)
+	{
+		Temp = Rigth;
+		Rigth->Pull(U, Temp);
+		return 0;
+	}
+	
 	return 0;
 }
 
-void User::Desplazar(User  * Temp)
+User User::Desplazar(User  * Temp)
 {
 	if (this->Left != nullptr)
 	{
@@ -267,9 +268,14 @@ void User::Desplazar(User  * Temp)
 	}
 	else
 	{
-		Temp = this;
+		Temp->apellido = this->apellido;
+		Temp->nombre = this->nombre;
+		Temp->edad = this->edad;
 		this->Ant = nullptr;
+		this->Rigth = nullptr;
+		this->Left = nullptr;
 		delete this;
+		return *Temp;
 	}
 }
 

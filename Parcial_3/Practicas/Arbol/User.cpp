@@ -77,77 +77,31 @@ void User::Postorden()
 	cout << "Edad: " << edad << endl;
 }
 
-int User::Push(User * U)
+int User::Push(User * U, User * Ante)
 {
-	if (U->apellido < apellido)
+	if (*U > *this)
 	{
 		if (Left == nullptr)
 		{
 			Left = U;
+			Left->Ant = Ante;
 		}
 		else
 		{
-			Left->Push(U);
+			Left->Push(U, Left);
 		}
 		return 0;
 	}
-	if (U->apellido > apellido)
+	if (*U < *this)
 	{
 		if (Rigth == nullptr)
 		{
 			Rigth = U;
+			Rigth->Ant = Ante;
 		}
 		else
 		{
-			Rigth->Push(U);
-		}
-		return 0;
-	}
-	else if (U->nombre < nombre)
-	{
-		if (Left == nullptr)
-		{
-			Left = U;
-		}
-		else
-		{
-			Left->Push(U);
-		}
-	}
-	else if (U->nombre > nombre)
-	{
-		if (Rigth == nullptr)
-		{
-			Rigth = U;
-		}
-		else
-		{
-			Rigth->Push(U);
-		}
-		return 0;
-	}
-	else if (U->edad < edad)
-	{
-		if (Left == nullptr)
-		{
-			Left = U;
-		}
-		else
-		{
-			Left->Push(U);
-		}
-		return 0;
-	}
-
-	else if (U->edad > edad)
-	{
-		if (Rigth == nullptr)
-		{
-			Rigth = U;
-		}
-		else
-		{
-			Rigth->Push(U);
+			Rigth->Push(U,Rigth);
 		}
 		return 0;
 	}
@@ -166,7 +120,6 @@ void User::Balance(int Cont)
 		Cont--;
 		balIzq = Left->pesoAct;
 		pesoAct = ((Nivel * balDer) + (Nivel * balIzq));
-		//temp->balIzq = pesoAct;
 	}
 	
 	if (Rigth != nullptr) 
@@ -176,32 +129,147 @@ void User::Balance(int Cont)
 		Cont--;
 		balDer = Rigth->pesoAct;
 		pesoAct = ((Nivel * balIzq) + (Nivel * balDer));
-		//temp->balDer = pesoAct;
+	
 	}
-	else
+	if(Left==nullptr && Rigth==nullptr)
 	{
 		pesoAct = Nivel;
 	}
 	
 }
 
-bool User::operator < (User * U)
+bool User::operator < (User & U)
 {
-	if (apellido < U->apellido)
+	if (U.apellido != apellido)
 	{
-		return true;
+		return U.apellido < apellido;
 	}
-	else if (nombre < U->nombre)
+	else if (U.nombre != nombre)
 	{
-		return true;
+		return U.nombre < nombre;
 	}
-	else if (edad < U->edad)
+	else if (U.edad != edad)
+	{
+		return U.edad < edad;
+	}
+}
+
+bool User::operator > (User & U)
+{
+	if (U.apellido != apellido)
+	{
+		return U.apellido > apellido;
+	}
+	else if (U.nombre != nombre)
+	{
+		return U.nombre > nombre;
+	}
+	else if (U.edad != edad)
+	{
+		return U.edad > edad;
+	}
+}
+
+bool User::operator = (User & U)
+{
+	if (U.apellido == apellido && U.nombre==nombre && U.edad==edad)
 	{
 		return true;
 	}
 	else
 	{
+
 		return false;
+	}
+}
+
+int User::Pull(User * U, User * Temp)
+{
+	if (*U > *Temp)
+	{
+		Temp = Left;
+		Left->Pull(U, Temp);
+		return 0;
+	}
+	if (*U < *Temp)
+	{
+		Temp = Rigth;
+		Rigth->Pull(U, Temp);
+		return 0;
+	}
+	if (*U = *Temp)
+	{
+		if (Temp->Left == nullptr && Temp->Rigth == nullptr)
+		{
+			if (Temp->Ant->apellido < Temp->apellido)
+			{
+				Temp->Ant->Rigth = nullptr;
+			}
+			else if (Temp->Ant->apellido > Temp->apellido)
+			{
+				Temp->Ant->Left = nullptr;
+			}
+			Temp->Ant = nullptr;
+			delete Temp;
+			return 0;
+		}
+		else
+		{
+			if (Temp->Left != nullptr && Temp->Rigth == nullptr)
+			{
+				if (Temp->Ant->apellido < Temp->apellido)
+				{
+					Temp->Ant->Rigth = Temp->Left;
+					Temp->Left->Ant = Temp->Ant;
+				}
+				else if (Temp->Ant->apellido > Temp->apellido)
+				{
+					Temp->Ant->Left = Temp->Left;
+					Temp->Left->Ant = Temp->Ant;
+				}
+				Temp->Left = nullptr;
+				delete Temp;
+				return 0;
+			}
+			if (Temp->Left == nullptr && Temp->Rigth != nullptr)
+			{
+				if (Temp->Ant->apellido < Temp->apellido)
+				{
+					Temp->Ant->Rigth = Temp->Rigth;
+					Temp->Rigth->Ant = Temp->Ant;
+				}
+				else if (Temp->Ant->apellido > Temp->apellido)
+				{
+					Temp->Ant->Left = Temp->Rigth;
+					Temp->Rigth->Ant = Temp->Ant;
+				}
+				Temp->Rigth = nullptr;
+				delete Temp;
+				return 0;
+			}
+
+			if (Temp->Left != nullptr && Temp->Rigth != nullptr)
+			{
+				Temp->Rigth->Desplazar(Temp);
+
+				return 0;
+			}
+		}
+	}
+	return 0;
+}
+
+void User::Desplazar(User  * Temp)
+{
+	if (this->Left != nullptr)
+	{
+		Left->Desplazar(Temp);
+	}
+	else
+	{
+		Temp = this;
+		this->Ant = nullptr;
+		delete this;
 	}
 }
 

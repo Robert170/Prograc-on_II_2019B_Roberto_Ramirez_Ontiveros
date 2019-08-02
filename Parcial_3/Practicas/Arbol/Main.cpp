@@ -23,6 +23,7 @@ int Menu(Arbol * A)
 		cout << "Mostrar el arbol Preorden(3)" << endl;
 		cout << "Mostrar el arbol Postorden(4)" << endl;
 		cout << "Revisar si el arbol esta balanceado(5)" << endl;
+		cout << "Eliminar un nodo(6)" << endl;
 		cout << "Salir (0)" << endl;
 		cin >> Eleccion;
 
@@ -54,6 +55,17 @@ int Menu(Arbol * A)
 			system("cls");
 			A->Balance();
 			break;
+		case '6':
+		{
+			system("cls");
+			cout << "Ingresa el nombre del nodo a eliminar: "; cin >> Nombre;
+			cout << "Ingrsa el apellido del nodo a eliminar: "; cin >> Apellido;
+			cout << "Ingresa la edad del nodo a eliminar: "; cin >> Edad;
+			User * U = new User(Nombre, Apellido, Edad);
+			A->Pull(U);
+			delete U;
+			break;
+		}
 		case '0':
 			return 0;
 			break;

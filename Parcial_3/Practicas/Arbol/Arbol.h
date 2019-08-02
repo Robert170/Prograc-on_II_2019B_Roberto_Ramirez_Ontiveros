@@ -22,6 +22,7 @@ public:
 	void Preorden();
 	void Postorden();
 	void Balance();
+	void Pull(User *);
 
 };
 

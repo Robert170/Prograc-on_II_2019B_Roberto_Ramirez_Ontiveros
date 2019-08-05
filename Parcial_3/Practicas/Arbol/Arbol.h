@@ -7,22 +7,27 @@ using std::cout;
 using std::cin;
 using std::endl;
 
+template<class T>
 class Arbol
 {
 public:
 	//Mienbros
-	User*Raiz = nullptr;
+	Nodo<T>*Raiz = nullptr;
 	int Cont = 0;
+
 
 	//Metodos
 	Arbol();
+	Arbol(Nodo<T>*);
 	~Arbol();
-	int Push(User*);
+
+	int Push(Nodo<T>*);
 	void Inorden();
 	void Preorden();
 	void Postorden();
 	void Balance();
-	void Pull(User *);
+	void Pull(Nodo<T>*);
+	void Rotacion();
 
 };
 

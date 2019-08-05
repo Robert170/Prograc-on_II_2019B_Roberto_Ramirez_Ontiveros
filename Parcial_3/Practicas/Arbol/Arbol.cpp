@@ -1,13 +1,21 @@
 #include "Arbol.h"
+#include "Persona.h"
 
 
-
-Arbol::Arbol()
+template<class T>
+Arbol<T>::Arbol()
 {
+	Raiz = nullptr;
 }
 
+template<class T>
+Arbol<T>::Arbol(Nodo<T>* U)
+{
+	Raiz = U;
+}
 
-Arbol::~Arbol()
+template<class T>
+Arbol<T>::~Arbol()
 {
 	if (Raiz != nullptr)
 	{
@@ -15,7 +23,8 @@ Arbol::~Arbol()
 	}
 }
 
-int Arbol::Push(User * U)
+template<class T>
+int Arbol<T>::Push(Nodo<T> * U)
 {
 	if (Raiz == nullptr)
 	{
@@ -55,7 +64,8 @@ int Arbol::Push(User * U)
 	return 0;
 }
 
-void Arbol::Inorden()
+template<class T>
+void Arbol<T>::Inorden()
 {
 	if (Raiz != nullptr)
 	{
@@ -67,13 +77,14 @@ void Arbol::Inorden()
 	}
 }
 
-void Arbol::Preorden()
+template<class T>
+void Arbol<T>::Preorden()
 {
 	if (Raiz != nullptr)
 	{
-		cout << "Apellido: " << Raiz->apellido << endl;
+		/*cout << "Apellido: " << Raiz->apellido << endl;
 		cout << "Nombre: " << Raiz->nombre << endl;
-		cout << "Edad: " << Raiz->edad << endl;
+		cout << "Edad: " << Raiz->edad << endl;*/
 		Raiz->PreordenLeft();
 		Raiz->PreordenRigth();
 	}
@@ -83,7 +94,8 @@ void Arbol::Preorden()
 	}
 }
 
-void Arbol::Postorden()
+template<class T>
+void Arbol<T>::Postorden()
 {
 	if (Raiz != nullptr)
 	{
@@ -95,7 +107,8 @@ void Arbol::Postorden()
 	}
 }
 
-void Arbol::Balance()
+template<class T>
+void Arbol<T>::Balance()
 {
 	if (Raiz->Left != nullptr) 
 	{
@@ -128,7 +141,8 @@ void Arbol::Balance()
 	}
 }
 
-void Arbol::Pull(User * U)
+template<class T>
+void Arbol<T>::Pull(Nodo<T>* U)
 {
 	if (Raiz == nullptr)
 	{
@@ -136,7 +150,7 @@ void Arbol::Pull(User * U)
 	}
 	else
 	{
-		User * Temp = new User();
+		Nodo<T> * Temp = new Nodo<T>();
 		if (*U > *Raiz)
 		{
 			Temp = Raiz->Left;
@@ -149,3 +163,32 @@ void Arbol::Pull(User * U)
 		}
 	}
 }
+
+template<class T>
+void Arbol<T>::Rotacion()
+{
+	Balance();
+	Nodo<T> * Temp = new Nodo<T>();
+	//se rota a la derecha
+	if (Raiz->balDer < Raiz->balIzq)
+	{
+		//El nodo izquierdo se vulve la raiz
+		Temp->Dato = Raiz->Dato;
+		Raiz->Left->Rigth = Raiz;
+		
+		
+
+	}
+	//se rota a la izquierda
+	if (Raiz->balIzq < Raiz->balDer)
+	{
+		//El nodo derecho se vuelve la raiz
+		Temp->Dato = Raiz->Dato;
+		Raiz->Rigth->Left = Raiz;
+		
+	}
+
+
+}
+
+template class Arbol<Persona>;

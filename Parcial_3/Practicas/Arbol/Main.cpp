@@ -1,4 +1,5 @@
 #include "Arbol.h"
+#include "Persona.h"
 #include <string> 
 #include <iostream>
 using std::string;
@@ -6,12 +7,11 @@ using std::cout;
 using std::cin;
 using std::endl;
 
-int Menu(Arbol * A)
+int Menu()
 {
-	unsigned short Edad;
-	string Nombre;
-	string Apellido;
+	
 	char Eleccion;
+	Arbol<Persona>*A = new Arbol<Persona>();
 
 	while (true)
 	{
@@ -29,41 +29,37 @@ int Menu(Arbol * A)
 
 		switch (Eleccion)
 		{
-		case '1':
+		case '1'://ingresar nodos
 		{
 			system("cls");
-			cout << "Ingresa un nombre: "; cin >> Nombre;
-			cout << "Ingrsa un apellido: "; cin >> Apellido;
-			cout << "Ingresa una edad: "; cin >> Edad;
-			User * U = new User(Nombre, Apellido, Edad);
-			A->Push(*&U);
+			//User * U = new User(Nombre, Apellido, Edad);
+			Nodo<Persona>*N = new Nodo<Persona>(Persona());
+			A->Push(N);
 			break;
 		}
-		case '2':
+		case '2'://mostrar arbol en inorden
 			system("cls");
 			A->Inorden();
 			break;
-		case '3':
+		case '3'://mostrar arbol en preorden
 			system("cls");
 			A->Preorden();
 			break;
-		case '4':
+		case '4'://mostrar arbol en postorden
 			system("cls");
 			A->Postorden();
 			break;
-		case '5':
+		case '5'://Mostrar si el arbol esta balanceado
 			system("cls");
 			A->Balance();
 			break;
-		case '6':
+		case '6'://eliminar el nodo que el usuario ingrese
 		{
 			system("cls");
-			cout << "Ingresa el nombre del nodo a eliminar: "; cin >> Nombre;
-			cout << "Ingrsa el apellido del nodo a eliminar: "; cin >> Apellido;
-			cout << "Ingresa la edad del nodo a eliminar: "; cin >> Edad;
-			User * U = new User(Nombre, Apellido, Edad);
-			A->Pull(U);
-			delete U;
+		
+			Nodo<Persona>*N = new Nodo<Persona>(Persona());
+			A->Pull(N);
+			
 			break;
 		}
 		case '0':
@@ -77,14 +73,15 @@ int Menu(Arbol * A)
 }
 
 
+
 int main()
 {
 	//creacion de puntaros e inicializacion de variables
-	Arbol * A = new Arbol();
+	
 
-	Menu(*&A); //llamada al menu
+	Menu(); //llamada al menu
 
-	delete A;
+	
 	cin.ignore();
 	cin.get();
 	return 0;

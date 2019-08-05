@@ -6,39 +6,39 @@ using std::cout;
 using std::cin;
 using std::endl;
 
-class User
+template<class T>
+class Nodo
 {
 public:
 
 	//Mienbros
-	string apellido;
-	string nombre;
-	int edad;
-	User*Rigth = nullptr;
-	User*Left = nullptr;
-	User*Ant = nullptr;
+	T Dato;
+	Nodo<T> *Rigth = nullptr;
+	Nodo<T> *Left = nullptr;
+	Nodo<T> *Ant = nullptr;
 	int Nivel = 0;
 	int balIzq = 0;
 	int balDer = 0;
 	int pesoAct = 0;
 
 	//Metodos
-	User(string, string, int);
+	
 	void PreordenLeft();
 	void PreordenRigth();
 	void Inorden();
 	void Postorden();
-	int Push(User*, User*);
+	int Push(Nodo<T>*, Nodo<T>*);
 	void Balance(int);
 
-	bool operator < (User&);
-	bool operator > (User&);
-	bool operator = (User&);
+	bool operator < (Nodo<T>&);
+	bool operator > (Nodo<T>&);
+	bool operator == (Nodo<T>&);
 
-	int Pull(User*, User*);
-	User Desplazar(User*);
-	User();
-	~User();
+	int Pull(Nodo<T>*, Nodo<T>*);
+	Nodo Desplazar(Nodo<T>*);
+	Nodo(T);
+	Nodo();
+	~Nodo();
 	
 };
 

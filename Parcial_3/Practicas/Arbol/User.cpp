@@ -1,68 +1,55 @@
 #include "User.h"
+#include "Persona.h"
 
 
-
-User::User(string Nom, string Ape, int Ed)
-{
-	nombre = Nom;
-	apellido = Ape;
-	edad = Ed;
-}
-
-
-void User::PreordenLeft()
+template<class T>
+void Nodo<T>::PreordenLeft()
 {
 	if (Left != nullptr)
 	{
-		cout << "Apellido: " << Left->apellido << endl;
-		cout << "Nombre: " << Left->nombre << endl;
-		cout << "Edad: " << Left->edad << endl;
+		cout << Left->Dato << endl;
 		Left->PreordenLeft();
 		if (Left->Rigth != nullptr)
 		{
-			cout << "Apellido: " << Left->Rigth->apellido << endl;
-			cout << "Nombre: " << Left->Rigth->nombre << endl;
-			cout << "Edad: " << Left->Rigth->edad << endl;
+			cout << Left->Rigth->Dato << endl;
 			Left->Rigth->PreordenLeft();
 		}
 	}
 }
 
-void User::PreordenRigth()
+template<class T>
+void Nodo<T>::PreordenRigth()
 {
 	if (Rigth != nullptr)
 	{
-		cout << "Apellido: " << Rigth->apellido << endl;
-		cout << "Nombre: " << Rigth->nombre << endl;
-		cout << "Edad: " << Rigth->edad << endl;
+		cout << Rigth->Dato << endl;
 		Rigth->PreordenLeft();
 		if (Rigth->Rigth != nullptr)
 		{
-			cout << "Apellido: " << Rigth->Rigth->apellido << endl;
-			cout << "Nombre: " << Rigth->Rigth->nombre << endl;
-			cout << "Edad: " << Rigth->Rigth->edad << endl;
+			cout << Rigth->Rigth->Dato << endl;
 			Rigth->Rigth->PreordenLeft();
 		}
 	}
 	
 }
 
-void User::Inorden()
+template<class T>
+void Nodo<T>::Inorden()
 {
 	if (Left != nullptr)
 	{
 		Left->Inorden();
 	}
-	cout << "Apellido: " << apellido << endl;
-	cout << "Nombre: " << nombre << endl;
-	cout << "Edad: " << edad << endl;
+	cout << Dato << endl;
+	
 	if (Rigth != nullptr)
 	{
 		Rigth->Inorden();
 	}
 }
 
-void User::Postorden()
+template<class T>
+void Nodo<T>::Postorden()
 {
 	if (Left != nullptr)
 	{
@@ -72,12 +59,11 @@ void User::Postorden()
 	{
 		Rigth->Postorden();
 	}
-	cout << "Apellido: " << apellido << endl;
-	cout << "Nombre: " << nombre << endl;
-	cout << "Edad: " << edad << endl;
+	cout << Dato << endl;
 }
 
-int User::Push(User * U, User * Ante)
+template<class T>
+int Nodo<T>::Push(Nodo<T> * U, Nodo<T> * Ante)
 {
 	if (*U > *this)
 	{
@@ -109,7 +95,8 @@ int User::Push(User * U, User * Ante)
 
 }
 
-void User::Balance(int Cont)
+template<class T>
+void Nodo<T>::Balance(int Cont)
 {
 	Nivel = Cont;
 	if (Left != nullptr) 
@@ -138,9 +125,10 @@ void User::Balance(int Cont)
 	
 }
 
-bool User::operator < (User & U)
+template<class T>
+bool Nodo<T>::operator < (Nodo & U)
 {
-	if (U.apellido != apellido)
+	/*if (U.apellido != apellido)
 	{
 		return U.apellido < apellido;
 	}
@@ -151,12 +139,14 @@ bool User::operator < (User & U)
 	else if (U.edad != edad)
 	{
 		return U.edad < edad;
-	}
+	}*/
+	return U.Dato < Dato;
 }
 
-bool User::operator > (User & U)
+template<class T>
+bool Nodo<T>::operator > (Nodo & U)
 {
-	if (U.apellido != apellido)
+	/*if (U.apellido != apellido)
 	{
 		return U.apellido > apellido;
 	}
@@ -167,33 +157,30 @@ bool User::operator > (User & U)
 	else if (U.edad != edad)
 	{
 		return U.edad > edad;
-	}
+	}*/
+
+	return U.Dato > Dato;
 }
 
-bool User::operator = (User & U)
+template<class T>
+bool Nodo<T>::operator == (Nodo & U) //revisar si el nodo que ingresamos es igual al nodo actual
 {
-	if (U.apellido == apellido && U.nombre==nombre && U.edad==edad)
-	{
-		return true;
-	}
-	else
-	{
-
-		return false;
-	}
+	return Dato == U.Dato;
 }
 
-int User::Pull(User * U, User * Temp)
+
+template<class T>
+int Nodo<T>::Pull(Nodo<T> * U, Nodo<T> * Temp)
 {
-	if (*U = *Temp)
+	if (U == Temp)
 	{
 		if (Temp->Left == nullptr && Temp->Rigth == nullptr)
 		{
-			if (Temp->Ant->apellido < Temp->apellido)
+			if (Temp->Ant->Dato < Temp->Dato)
 			{
 				Temp->Ant->Rigth = nullptr;
 			}
-			else if (Temp->Ant->apellido > Temp->apellido)
+			else if (Temp->Ant->Dato > Temp->Dato)
 			{
 				Temp->Ant->Left = nullptr;
 			}
@@ -205,12 +192,12 @@ int User::Pull(User * U, User * Temp)
 		{
 			if (Temp->Left != nullptr && Temp->Rigth == nullptr)
 			{
-				if (Temp->Ant->apellido < Temp->apellido)
+				if (Temp->Ant->Dato < Temp->Dato)
 				{
 					Temp->Ant->Rigth = Temp->Left;
 					Temp->Left->Ant = Temp->Ant;
 				}
-				else if (Temp->Ant->apellido > Temp->apellido)
+				else if (Temp->Ant->Dato > Temp->Dato)
 				{
 					Temp->Ant->Left = Temp->Left;
 					Temp->Left->Ant = Temp->Ant;
@@ -221,12 +208,12 @@ int User::Pull(User * U, User * Temp)
 			}
 			if (Temp->Left == nullptr && Temp->Rigth != nullptr)
 			{
-				if (Temp->Ant->apellido < Temp->apellido)
+				if (Temp->Ant->Dato < Temp->Dato)
 				{
 					Temp->Ant->Rigth = Temp->Rigth;
 					Temp->Rigth->Ant = Temp->Ant;
 				}
-				else if (Temp->Ant->apellido > Temp->apellido)
+				else if (Temp->Ant->Dato > Temp->Dato)
 				{
 					Temp->Ant->Left = Temp->Rigth;
 					Temp->Rigth->Ant = Temp->Ant;
@@ -238,8 +225,8 @@ int User::Pull(User * U, User * Temp)
 
 			if (Temp->Left != nullptr && Temp->Rigth != nullptr)
 			{
-				User * T = new User();
-				T = &Temp->Rigth->Desplazar(Temp);
+				Nodo<T> * Te = new Nodo<T>();
+				Te = &Temp->Rigth->Desplazar(Temp);
 				return 0;
 			}
 		}
@@ -260,7 +247,8 @@ int User::Pull(User * U, User * Temp)
 	return 0;
 }
 
-User User::Desplazar(User  * Temp)
+template<class T>
+Nodo<T> Nodo<T>::Desplazar(Nodo  * Temp)
 {
 	if (this->Left != nullptr)
 	{
@@ -268,9 +256,7 @@ User User::Desplazar(User  * Temp)
 	}
 	else
 	{
-		Temp->apellido = this->apellido;
-		Temp->nombre = this->nombre;
-		Temp->edad = this->edad;
+		Temp->Dato = this->Dato;
 		this->Ant = nullptr;
 		this->Rigth = nullptr;
 		this->Left = nullptr;
@@ -279,10 +265,25 @@ User User::Desplazar(User  * Temp)
 	}
 }
 
+template<class T>
+Nodo<T>::Nodo(T D)
+{
+	Dato = D;
+	Left = nullptr;
+	Rigth = nullptr;
+}
 
 
 
-User::User()
+template<class T>
+Nodo<T>::Nodo()
+{
+	Left = nullptr;
+	Rigth = nullptr;
+}
+
+template<class T>
+Nodo<T>::~Nodo()
 {
 	if (Left != nullptr)
 	{
@@ -294,7 +295,4 @@ User::User()
 	}
 }
 
-
-User::~User()
-{
-}
+template class Nodo<Persona>;

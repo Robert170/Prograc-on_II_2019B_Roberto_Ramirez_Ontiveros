@@ -29,6 +29,7 @@ public:
 	void Postorden();
 	int Push(Nodo<T>*, Nodo<T>*);
 	void Balance(int);
+	void Rotacion();
 
 	bool operator < (Nodo<T>&);
 	bool operator > (Nodo<T>&);

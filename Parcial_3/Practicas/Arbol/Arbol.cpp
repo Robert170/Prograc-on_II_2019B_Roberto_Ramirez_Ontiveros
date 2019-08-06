@@ -168,15 +168,17 @@ template<class T>
 void Arbol<T>::Rotacion()
 {
 	Balance();
-	Nodo<T> * Temp = new Nodo<T>();
+	Nodo*Temp = *this->Left;
+	Nodo*Temp2 = *this->Left->Rigth;
 	//se rota a la derecha
+	Raiz->Left->Rotacion();
+	Raiz->Rigth->Rotacion();
 	if (Raiz->balDer < Raiz->balIzq)
 	{
 		//El nodo izquierdo se vulve la raiz
-		Temp->Dato = Raiz->Dato;
-		Raiz->Left->Rigth = Raiz;
-		
-		
+
+		*this->Left = Temp2;
+		Temp->Rigth = *this;
 
 	}
 	//se rota a la izquierda
@@ -185,7 +187,6 @@ void Arbol<T>::Rotacion()
 		//El nodo derecho se vuelve la raiz
 		Temp->Dato = Raiz->Dato;
 		Raiz->Rigth->Left = Raiz;
-		
 	}
 
 

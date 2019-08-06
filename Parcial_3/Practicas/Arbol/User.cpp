@@ -126,6 +126,46 @@ void Nodo<T>::Balance(int Cont)
 }
 
 template<class T>
+void Nodo<T>::Rotacion()
+{
+	if (*this->Left != nullptr)
+	{
+		*this->Left->Rotacion();
+		
+	}
+	if (*this->Rigth!=nullptr)
+	{
+		*this->Rigth->Rotacion();
+	}
+	if (*this->balDer < *this->balIzq)
+	{
+		Nodo*Temp = *this->Rigth;
+		Nodo*Temp2 = *this->Rigth->Left;
+
+		*this->Rigth = Temp2;
+		Temp->Left = *this;
+
+		*this->Ant = Temp;
+		Temp2->Ant = *this;
+
+	}
+	if (*this->balIzq < *this->balDer)
+	{
+			Nodo*Temp = *this->Left;
+			Nodo*Temp2 = *this->Left->Rigth;
+
+			*this->Left = Temp2;
+			Temp->Rigth = *this;
+
+			*this->Ant = Temp;
+			Temp2->Ant = *this;
+
+		
+	}
+
+}
+
+template<class T>
 bool Nodo<T>::operator < (Nodo & U)
 {
 	/*if (U.apellido != apellido)
@@ -266,9 +306,8 @@ Nodo<T> Nodo<T>::Desplazar(Nodo  * Temp)
 }
 
 template<class T>
-Nodo<T>::Nodo(T D)
+Nodo<T>::Nodo(T D) : Dato(D)
 {
-	Dato = D;
 	Left = nullptr;
 	Rigth = nullptr;
 }

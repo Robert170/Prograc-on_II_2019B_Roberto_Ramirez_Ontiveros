@@ -34,10 +34,10 @@ int Arbol<T>::Push(Nodo<T> * U)
 	{
 		if (*U > *Raiz)
 		{
-			if (Raiz->Left == nullptr)
+			if (Raiz->Rigth == nullptr)
 			{
-				Raiz->Left = U;
-				Raiz->Left->Ant = Raiz;
+				Raiz->Rigth = U;
+				Raiz->Rigth->Ant = Raiz;
 			}
 			else
 			{
@@ -48,10 +48,10 @@ int Arbol<T>::Push(Nodo<T> * U)
 
 		if (*U < *Raiz)
 		{
-			if (Raiz->Rigth == nullptr)
+			if (Raiz->Left == nullptr)
 			{
-				Raiz->Rigth = U;
-				Raiz->Rigth->Ant = Raiz;
+				Raiz->Left = U;
+				Raiz->Left->Ant = Raiz;
 			}
 			else
 			{
@@ -168,25 +168,42 @@ template<class T>
 void Arbol<T>::Rotacion()
 {
 	Balance();
-	Nodo*Temp = *this->Left;
-	Nodo*Temp2 = *this->Left->Rigth;
+	
 	//se rota a la derecha
-	Raiz->Left->Rotacion();
-	Raiz->Rigth->Rotacion();
+	if (Raiz->Left != nullptr)
+	{
+		Raiz->Left->Rotacion();
+	}
+	if (Raiz->Rigth != nullptr)
+	{
+		Raiz->Rigth->Rotacion();
+	}
 	if (Raiz->balDer < Raiz->balIzq)
 	{
 		//El nodo izquierdo se vulve la raiz
-
-		*this->Left = Temp2;
-		Temp->Rigth = *this;
-
+		Nodo<T>*Temp = Raiz->Left->Rigth;
+		if (Temp != nullptr)
+		{
+			Temp->Ant = Raiz;
+		}
+		Raiz->Ant = Raiz->Left;
+		Raiz->Left->Rigth = Raiz;
+		Raiz->Left = Temp;
+		Raiz = Raiz->Ant;
 	}
 	//se rota a la izquierda
 	if (Raiz->balIzq < Raiz->balDer)
 	{
 		//El nodo derecho se vuelve la raiz
-		Temp->Dato = Raiz->Dato;
+		Nodo<T>*Temp = Raiz->Rigth->Left;
+		if (Temp != nullptr)
+		{
+			Temp->Ant = Raiz;
+		}
+		Raiz->Ant = Raiz->Rigth;
 		Raiz->Rigth->Left = Raiz;
+		Raiz->Rigth = Temp;
+		Raiz = Raiz->Ant;
 	}
 
 

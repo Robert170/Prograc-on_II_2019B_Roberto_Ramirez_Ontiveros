@@ -67,6 +67,19 @@ int Nodo<T>::Push(Nodo<T> * U, Nodo<T> * Ante)
 {
 	if (*U > *this)
 	{
+		if (Rigth == nullptr)
+		{
+			Rigth = U;
+			Rigth->Ant = Ante;
+		}
+		else
+		{
+			Rigth->Push(U, Rigth);
+		}
+		return 0;
+	}
+	if (*U < *this)
+	{
 		if (Left == nullptr)
 		{
 			Left = U;
@@ -75,19 +88,6 @@ int Nodo<T>::Push(Nodo<T> * U, Nodo<T> * Ante)
 		else
 		{
 			Left->Push(U, Left);
-		}
-		return 0;
-	}
-	if (*U < *this)
-	{
-		if (Rigth == nullptr)
-		{
-			Rigth = U;
-			Rigth->Ant = Ante;
-		}
-		else
-		{
-			Rigth->Push(U,Rigth);
 		}
 		return 0;
 	}
@@ -128,39 +128,61 @@ void Nodo<T>::Balance(int Cont)
 template<class T>
 void Nodo<T>::Rotacion()
 {
-	if (*this->Left != nullptr)
+	if (this->Left != nullptr)
 	{
-		*this->Left->Rotacion();
+		this->Left->Rotacion();
+	}
+	if (this->Rigth!=nullptr)
+	{
+		this->Rigth->Rotacion();
+	}
+	if (this->balDer < this->balIzq)
+	{
 		
+			Nodo<T>*Temp = this->Left->Rigth;
+			if (this->Ant->Dato > this->Dato)
+			{
+				this->Rigth->Ant = this->Ant;
+				this->Ant->Rigth = this->Rigth;
+				this->Ant = this->Rigth;
+			}
+			else if (this->Ant->Dato < this->Dato)
+			{
+				this->Left->Ant = this->Ant;
+				this->Ant->Left = this->Left;
+				this->Ant = this->Left;
+			}
+
+			this->Left->Rigth = this;
+			this->Left = Temp;
+			if (Temp != nullptr)
+			{
+				Temp->Ant = this;
+			}
+			
 	}
-	if (*this->Rigth!=nullptr)
+	if (this->balIzq < this->balDer)
 	{
-		*this->Rigth->Rotacion();
-	}
-	if (*this->balDer < *this->balIzq)
-	{
-		Nodo*Temp = *this->Rigth;
-		Nodo*Temp2 = *this->Rigth->Left;
+		Nodo<T>*Temp = this->Rigth->Left;
+		if (this->Ant->Dato > this->Dato)
+		{
+			this->Rigth->Ant = this->Ant;
+			this->Ant->Rigth = this->Rigth;
+			this->Ant = this->Rigth;
+		}
+		else if (this->Ant->Dato < this->Dato)
+		{
+			this->Left->Ant = this->Ant;
+			this->Ant->Left = this->Left;
+			this->Ant = this->Left;
+		}
 
-		*this->Rigth = Temp2;
-		Temp->Left = *this;
-
-		*this->Ant = Temp;
-		Temp2->Ant = *this;
-
-	}
-	if (*this->balIzq < *this->balDer)
-	{
-			Nodo*Temp = *this->Left;
-			Nodo*Temp2 = *this->Left->Rigth;
-
-			*this->Left = Temp2;
-			Temp->Rigth = *this;
-
-			*this->Ant = Temp;
-			Temp2->Ant = *this;
-
-		
+		this->Rigth->Left = this;
+		this->Rigth = Temp;
+		if (Temp != nullptr)
+		{
+			Temp->Ant = this;
+		}
 	}
 
 }

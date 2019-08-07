@@ -24,6 +24,7 @@ int Menu()
 		cout << "Mostrar el arbol Postorden(4)" << endl;
 		cout << "Revisar si el arbol esta balanceado(5)" << endl;
 		cout << "Eliminar un nodo(6)" << endl;
+		cout << "Rotar el arbol(7)" << endl;
 		cout << "Salir (0)" << endl;
 		cin >> Eleccion;
 
@@ -59,9 +60,11 @@ int Menu()
 		
 			Nodo<Persona>*N = new Nodo<Persona>(Persona());
 			A->Pull(N);
-			
 			break;
 		}
+		case '7':
+			A->Rotacion();
+			break;
 		case '0':
 			return 0;
 			break;

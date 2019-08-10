@@ -1,6 +1,13 @@
 #include "Persona.h"
 
+//Sobrecarga del operador out
+std::ostream & operator<<(std::ostream & os, Persona & P)
+{
+	os << "Apellido: " << P.apellido << " Nombre: " << P.nombre << " Edad: " << P.edad << std::endl;
+	return os;
+}
 
+//Sobrecarga de operador
 bool Persona::operator<(Persona & U)
 {
 	if (U.apellido != apellido)
@@ -16,7 +23,7 @@ bool Persona::operator<(Persona & U)
 		return U.edad < edad;
 	}
 }
-
+//Sobrecarga de operador
 bool Persona::operator>(Persona & U)
 {
 	if (U.apellido != apellido)
@@ -32,7 +39,7 @@ bool Persona::operator>(Persona & U)
 		return U.edad > edad;
 	}
 }
-
+//Sobrecarga de operador
 bool Persona::operator==(Persona & P)
 {
 	if (apellido == P.apellido && nombre == P.nombre && edad == P.edad)
@@ -45,13 +52,7 @@ bool Persona::operator==(Persona & P)
 	}
 }
 
-Persona::Persona(std::string N, std::string A, int E)
-{
-	nombre = N;
-	apellido = A;
-	edad = E;
-}
-
+//Constructor para la creación de un nuevo nodo
 Persona::Persona()
 {
 	std::cout << "Ingresa un nombre: "; std::cin >> nombre;
@@ -59,12 +60,13 @@ Persona::Persona()
 	std::cout << "Ingresa una edad: "; std::cin >> edad;
 }
 
-Persona::~Persona()
+//Función para poder guardar los datos ingresados en la clase persona
+Persona::Persona(std::string N, std::string A, int E)
 {
+	nombre = N;
+	apellido = A;
+	edad = E;
 }
 
-std::ostream & operator<<(std::ostream & os, Persona & P)
-{
-	os << "Apellido: " << P.apellido << " Nombre: " << P.nombre << " Edad: " << P.edad << std::endl;
-	return os;
-}
+//Destructor
+Persona::~Persona() {}

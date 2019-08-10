@@ -2,6 +2,7 @@
 #include "Persona.h"
 
 
+//Función para ...
 template<class T>
 void Nodo<T>::PreordenLeft()
 {
@@ -17,6 +18,8 @@ void Nodo<T>::PreordenLeft()
 	}
 }
 
+
+//Función para ...
 template<class T>
 void Nodo<T>::PreordenRigth()
 {
@@ -33,6 +36,8 @@ void Nodo<T>::PreordenRigth()
 	
 }
 
+
+//Función imprimir en I_O
 template<class T>
 void Nodo<T>::Inorden()
 {
@@ -41,13 +46,14 @@ void Nodo<T>::Inorden()
 		Left->Inorden();
 	}
 	cout << Dato << endl;
-	
 	if (Rigth != nullptr)
 	{
 		Rigth->Inorden();
 	}
 }
 
+
+//Función imprimir en P_O
 template<class T>
 void Nodo<T>::Postorden()
 {
@@ -62,6 +68,104 @@ void Nodo<T>::Postorden()
 	cout << Dato << endl;
 }
 
+
+//Función para poder checar si el árbol está balanceado
+template<class T>
+void Nodo<T>::Balance(int Cont)
+{
+	Nivel = Cont;
+	if (Left != nullptr)
+	{
+
+		Cont++;
+		Left->Balance(Cont);
+		Cont--;
+		balIzq = Left->pesoAct;
+		pesoAct = ((Nivel * balDer) + (Nivel * balIzq));
+	}
+
+	if (Rigth != nullptr)
+	{
+		Cont++;
+		Rigth->Balance(Cont);
+		Cont--;
+		balDer = Rigth->pesoAct;
+		pesoAct = ((Nivel * balIzq) + (Nivel * balDer));
+
+	}
+	if (Left == nullptr && Rigth == nullptr)
+	{
+		pesoAct = Nivel;
+	}
+
+}
+
+
+//Función para poder Rotar
+template<class T>
+void Nodo<T>::Rotacion()
+{
+	if (this->Left != nullptr)
+	{
+		this->Left->Rotacion();
+	}
+	if (this->Rigth != nullptr)
+	{
+		this->Rigth->Rotacion();
+	}
+	if (this->balDer < this->balIzq)
+	{
+
+		Nodo<T>*Temp = this->Left->Rigth;
+		if (this->Ant->Dato > this->Dato)
+		{
+			this->Rigth->Ant = this->Ant;
+			this->Ant->Rigth = this->Rigth;
+			this->Ant = this->Rigth;
+		}
+		else if (this->Ant->Dato < this->Dato)
+		{
+			this->Left->Ant = this->Ant;
+			this->Ant->Left = this->Left;
+			this->Ant = this->Left;
+		}
+
+		this->Left->Rigth = this;
+		this->Left = Temp;
+		if (Temp != nullptr)
+		{
+			Temp->Ant = this;
+		}
+
+	}
+	if (this->balIzq < this->balDer)
+	{
+		Nodo<T>*Temp = this->Rigth->Left;
+		if (this->Ant->Dato > this->Dato)
+		{
+			this->Rigth->Ant = this->Ant;
+			this->Ant->Rigth = this->Rigth;
+			this->Ant = this->Rigth;
+		}
+		else if (this->Ant->Dato < this->Dato)
+		{
+			this->Left->Ant = this->Ant;
+			this->Ant->Left = this->Left;
+			this->Ant = this->Left;
+		}
+
+		this->Rigth->Left = this;
+		this->Rigth = Temp;
+		if (Temp != nullptr)
+		{
+			Temp->Ant = this;
+		}
+	}
+
+}
+
+
+//Función para poder ingresar un nodo al árbol
 template<class T>
 int Nodo<T>::Push(Nodo<T> * U, Nodo<T> * Ante)
 {
@@ -92,145 +196,10 @@ int Nodo<T>::Push(Nodo<T> * U, Nodo<T> * Ante)
 		return 0;
 	}
 	return 0;
-
-}
-
-template<class T>
-void Nodo<T>::Balance(int Cont)
-{
-	Nivel = Cont;
-	if (Left != nullptr) 
-	{
-
-		Cont++;
-		Left->Balance(Cont);
-		Cont--;
-		balIzq = Left->pesoAct;
-		pesoAct = ((Nivel * balDer) + (Nivel * balIzq));
-	}
-	
-	if (Rigth != nullptr) 
-	{
-		Cont++;
-		Rigth->Balance(Cont);
-		Cont--;
-		balDer = Rigth->pesoAct;
-		pesoAct = ((Nivel * balIzq) + (Nivel * balDer));
-	
-	}
-	if(Left==nullptr && Rigth==nullptr)
-	{
-		pesoAct = Nivel;
-	}
-	
-}
-
-template<class T>
-void Nodo<T>::Rotacion()
-{
-	if (this->Left != nullptr)
-	{
-		this->Left->Rotacion();
-	}
-	if (this->Rigth!=nullptr)
-	{
-		this->Rigth->Rotacion();
-	}
-	if (this->balDer < this->balIzq)
-	{
-		
-			Nodo<T>*Temp = this->Left->Rigth;
-			if (this->Ant->Dato > this->Dato)
-			{
-				this->Rigth->Ant = this->Ant;
-				this->Ant->Rigth = this->Rigth;
-				this->Ant = this->Rigth;
-			}
-			else if (this->Ant->Dato < this->Dato)
-			{
-				this->Left->Ant = this->Ant;
-				this->Ant->Left = this->Left;
-				this->Ant = this->Left;
-			}
-
-			this->Left->Rigth = this;
-			this->Left = Temp;
-			if (Temp != nullptr)
-			{
-				Temp->Ant = this;
-			}
-			
-	}
-	if (this->balIzq < this->balDer)
-	{
-		Nodo<T>*Temp = this->Rigth->Left;
-		if (this->Ant->Dato > this->Dato)
-		{
-			this->Rigth->Ant = this->Ant;
-			this->Ant->Rigth = this->Rigth;
-			this->Ant = this->Rigth;
-		}
-		else if (this->Ant->Dato < this->Dato)
-		{
-			this->Left->Ant = this->Ant;
-			this->Ant->Left = this->Left;
-			this->Ant = this->Left;
-		}
-
-		this->Rigth->Left = this;
-		this->Rigth = Temp;
-		if (Temp != nullptr)
-		{
-			Temp->Ant = this;
-		}
-	}
-
-}
-
-template<class T>
-bool Nodo<T>::operator < (Nodo & U)
-{
-	/*if (U.apellido != apellido)
-	{
-		return U.apellido < apellido;
-	}
-	else if (U.nombre != nombre)
-	{
-		return U.nombre < nombre;
-	}
-	else if (U.edad != edad)
-	{
-		return U.edad < edad;
-	}*/
-	return U.Dato < Dato;
-}
-
-template<class T>
-bool Nodo<T>::operator > (Nodo & U)
-{
-	/*if (U.apellido != apellido)
-	{
-		return U.apellido > apellido;
-	}
-	else if (U.nombre != nombre)
-	{
-		return U.nombre > nombre;
-	}
-	else if (U.edad != edad)
-	{
-		return U.edad > edad;
-	}*/
-
-	return U.Dato > Dato;
-}
-
-template<class T>
-bool Nodo<T>::operator == (Nodo & U) //revisar si el nodo que ingresamos es igual al nodo actual
-{
-	return Dato == U.Dato;
 }
 
 
+//Función para eliminar un nodo especifico
 template<class T>
 int Nodo<T>::Pull(Nodo<T> * U, Nodo<T> * Temp)
 {
@@ -305,10 +274,63 @@ int Nodo<T>::Pull(Nodo<T> * U, Nodo<T> * Temp)
 		Rigth->Pull(U, Temp);
 		return 0;
 	}
-	
+
 	return 0;
 }
 
+
+//Sobrecarga del operador
+template<class T>
+bool Nodo<T>::operator < (Nodo & U)
+{
+	return U.Dato < Dato;
+
+	/*if (U.apellido != apellido)
+	{
+		return U.apellido < apellido;
+	}
+	else if (U.nombre != nombre)
+	{
+		return U.nombre < nombre;
+	}
+	else if (U.edad != edad)
+	{
+		return U.edad < edad;
+	}*/
+}
+
+
+//Sobrecarga del operador 
+template<class T>
+bool Nodo<T>::operator > (Nodo & U)
+{
+	return U.Dato > Dato;
+
+	/*if (U.apellido != apellido)
+	{
+		return U.apellido > apellido;
+	}
+	else if (U.nombre != nombre)
+	{
+		return U.nombre > nombre;
+	}
+	else if (U.edad != edad)
+	{
+		return U.edad > edad;
+	}*/
+}
+
+
+//Sobrecarga del operador
+template<class T>
+//revisar si el nodo que ingresamos es igual al nodo actual
+bool Nodo<T>::operator == (Nodo & U)
+{
+	return Dato == U.Dato;
+}
+
+
+//Función para un intercambio de valores de nodos cuando sus punteros L and R tienen dos datos
 template<class T>
 Nodo<T> Nodo<T>::Desplazar(Nodo  * Temp)
 {
@@ -327,6 +349,8 @@ Nodo<T> Nodo<T>::Desplazar(Nodo  * Temp)
 	}
 }
 
+
+//Constructor para definir el valor de los punteros cuando el nodo se crea de manera automatica
 template<class T>
 Nodo<T>::Nodo(T D) : Dato(D)
 {
@@ -335,7 +359,7 @@ Nodo<T>::Nodo(T D) : Dato(D)
 }
 
 
-
+//Constructor para definir el valor de los punteros del nuevo nodo
 template<class T>
 Nodo<T>::Nodo()
 {
@@ -343,6 +367,8 @@ Nodo<T>::Nodo()
 	Rigth = nullptr;
 }
 
+
+//Destructor
 template<class T>
 Nodo<T>::~Nodo()
 {
@@ -356,4 +382,7 @@ Nodo<T>::~Nodo()
 	}
 }
 
+
+
+//Importante
 template class Nodo<Persona>;
